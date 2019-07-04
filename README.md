@@ -9,7 +9,8 @@ encoder-decoder summarization model, tensorflow offers basic model: IT turns out
 End-to-end approach to sequence learning that makes minimal assumptions on the sequence structure. Our method uses a multi-layered Long Short-Term Memory (LSTM) to map the input sequence to a vector of a fixed dimensionality, and then another deep LSTM to decode the target sequence from the vector.
 
  # Seq2Seq model arch:
-def seq2seq_model_builder(HIDDEN_DIM=300):
+  
+  def seq2seq_model_builder(HIDDEN_DIM=300):
     
     encoder_inputs = Input(shape=(MAX_LEN, ), dtype='int32',)
     encoder_embedding = embed_layer(encoder_inputs)
@@ -27,30 +28,13 @@ def seq2seq_model_builder(HIDDEN_DIM=300):
     return model
 
 # The Layers can be broken down into 5 different parts:
+Input Layer (Encoder and Decoder):
+Embedding Layer (Encoder and Decoder)
+LSTM Layer (Encoder and Decoder)
+Decoder Output Layer
 
-# Input Layer (Encoder and Decoder):
-
-    decoder_input_layer = Input(shape=(sequence_length, ))
-    encoder_input_layer = Input(shape=(sequence_length, ))
-
-
-
-# Embedding Layer (Encoder and Decoder)
- embedding_layer = Embedding(input_dim = vocab_size,
-                            output_dim = embedding_dimension, 
-                            input_length = sequence_length)
-
-# LSTM Layer (Encoder and Decoder)
-encoder_LSTM = LSTM(HIDDEN_DIM, return_state=True)    encoder_outputs, state_h, state_c = encoder_LSTM(encoder_embedding)
-decoder_LSTM = LSTM(HIDDEN_DIM, return_state=True, return_sequences=True)   
-decoder_outputs, _, _ = decoder_LSTM(decoder_embedding, initial_state=[state_h, state_c])
-
-# Decoder Output Layer
  
- outputs = TimeDistributed(Dense(VOCAB_SIZE, activation='softmax'))(decoder_outputs)
- 
- 
- # Whole process can be:
+ # Procedure of summarization:
 # Text Preprocessing
  Loading Story:
  
