@@ -9,9 +9,9 @@ encoder-decoder summarization model, tensorflow offers basic model: IT turns out
 End-to-end approach to sequence learning that makes minimal assumptions on the sequence structure. Our method uses a multi-layered Long Short-Term Memory (LSTM) to map the input sequence to a vector of a fixed dimensionality, and then another deep LSTM to decode the target sequence from the vector.
 
  # Seq2Seq model arch:
-  
+  ```
   def seq2seq_model_builder(HIDDEN_DIM=300):
-    
+    ```
     encoder_inputs = Input(shape=(MAX_LEN, ), dtype='int32',)
     encoder_embedding = embed_layer(encoder_inputs)
     encoder_LSTM = LSTM(HIDDEN_DIM, return_state=True)
@@ -37,7 +37,7 @@ End-to-end approach to sequence learning that makes minimal assumptions on the s
  # Procedure of summarization:
 ## Text Preprocessing
  ###### Loading Story:
- '''
+ ```
  def load_stories(directory):
     stories = list()
     for name in listdir(directory):
@@ -50,17 +50,17 @@ End-to-end approach to sequence learning that makes minimal assumptions on the s
     return stories
 directory = 'dataset/stories_text_summarization_dataset_test'
 stories = load_stories(directory)
-'''
+```
  ###### Splititng story:
- 
+ ```
  def split_story(doc):
     index = doc.find('@highlight')
     story, highlights = doc[:index], doc[index:].split('@highlight')
     highlights = [h.strip() for h in highlights if len(h) > 0]
     return story, highlights
-   
+   ```
   ###### cleaning lines:
-  
+  ```
   def clean_lines(lines):
     cleaned = list()
     table = str.maketrans('', '', string.punctuation)
@@ -75,12 +75,12 @@ stories = load_stories(directory)
         cleaned.append(' '.join(line))
     cleaned = [c for c in cleaned if len(c) > 0]
     return cleaned
-  
+  ```
 
   
 ## Put BOS tag and EOS tag for decoder input
   means “Begin of Sequence”, and “End of Sequence”.
-  
+ ``` 
   def tagger(decoder_input_sentence):
   bos = "<BOS> "
   eos = " <EOS>"
@@ -88,10 +88,10 @@ stories = load_stories(directory)
   return final_target
 
 decoder_inputs = tagger(decoder_input_text)
- 
+ ```
 ## Vocabulary 
   
-  from keras.preprocessing.text import Tokenizer
+ ``` from keras.preprocessing.text import Tokenizer
 
 def vocab_creater(text_lists, VOCAB_SIZE):
 
@@ -111,8 +111,9 @@ def vocab_creater(text_lists, VOCAB_SIZE):
   return word2idx, idx2word
 
 word2idx, idx2word = vocab_creater(text_lists=encoder_input_text+decoder_input_t
-
+```
 ## Tokenize Bag of words to Bag of IDs
+```
 from keras.preprocessing.text import Tokenizer
 VOCAB_SIZE = 14999
 
@@ -125,10 +126,10 @@ def text2seq(encoder_text, decoder_text, VOCAB_SIZE):
   return encoder_sequences, decoder_sequences
 
 encoder_sequences, decoder_sequences = text2seq(encoder_text, decoder_text, VOCAB_SIZE) 
-
+```
 
 ## Padding
-
+```
 from keras.preprocessing.sequence import pad_sequences
 
 def padding(encoder_sequences, decoder_sequences, MAX_LEN):
@@ -139,10 +140,10 @@ def padding(encoder_sequences, decoder_sequences, MAX_LEN):
   return encoder_input_data, decoder_input_data
 
 encoder_input_data, decoder_input_data = padding(encoder_sequences, decoder_sequences, MAX_LEN):
-
+```
 ## Word Embedding
  We use Pretraind Word2Vec Model from Glove
- 
+ ```
 import numpy as np
 word_embeddings = {}
 f = open(r'glove.6B.100d.txt', encoding='utf-8')
@@ -155,13 +156,13 @@ for line in f:
     #print(coefs)
     word_embeddings[word] = coefs
 f.close()
- 
+ ```
 ## Reshape the Data depends on neural network shape
 
 ## Split Data for training and validation, testing
-
+```
  from sklearn.model_selection import train_test_split
-
+```
 # For Example:
 ## Input:
 Australian wine exports hit a record 52.1 million litters worth 260 million dollars (143 million us) in September, the government statistics office reported on Monday
