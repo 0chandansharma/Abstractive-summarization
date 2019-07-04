@@ -6,7 +6,6 @@ Nowadays, encoder-decoder model that is one of the neural network models is main
 
 encoder-decoder summarization model, tensorflow offers basic model: IT turns out for shorter texts, summarization can be learned end-to-end with a deep learning technique called sequence-to-sequence learning.
 
-End-to-end approach to sequence learning that makes minimal assumptions on the sequence structure. Our method uses a multi-layered Long Short-Term Memory (LSTM) to map the input sequence to a vector of a fixed dimensionality, and then another deep LSTM to decode the target sequence from the vector.
 
  # Seq2Seq model arch:
   
