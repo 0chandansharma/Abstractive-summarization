@@ -13,4 +13,6 @@ End-to-end approach to sequence learning that makes minimal assumptions on the s
 Australian wine exports hit a record 52.1 million litters worth 260 million dollars (143 million us) in September, the government statistics office reported on Monday
 # Output:
 Australian wine exports hit record high in September
-The encoder-decoder model is composed of encoder and decoder like its name. The encoder converts an input document to a latent representation (vector), and the decoder generates a summary by using it.
+
+# 
+The encoder-decoder model is composed of encoder and decoder like its name.The encoder converts an input document to a latent representation (vector), and the decoder generates a summary by using it.
