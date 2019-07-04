@@ -9,9 +9,9 @@ encoder-decoder summarization model, tensorflow offers basic model: IT turns out
 End-to-end approach to sequence learning that makes minimal assumptions on the sequence structure. Our method uses a multi-layered Long Short-Term Memory (LSTM) to map the input sequence to a vector of a fixed dimensionality, and then another deep LSTM to decode the target sequence from the vector.
 
  # Seq2Seq model arch:
-  ```
+  
   def seq2seq_model_builder(HIDDEN_DIM=300):
-    ```
+    
     encoder_inputs = Input(shape=(MAX_LEN, ), dtype='int32',)
     encoder_embedding = embed_layer(encoder_inputs)
     encoder_LSTM = LSTM(HIDDEN_DIM, return_state=True)
@@ -27,7 +27,9 @@ End-to-end approach to sequence learning that makes minimal assumptions on the s
     
     return model
 
-## The Layers can be broken down into 5 different parts:
+
+# The Layers can be broken down into 5 different parts:
+
 ###### Input Layer (Encoder and Decoder):
 ###### Embedding Layer (Encoder and Decoder)
 ###### LSTM Layer (Encoder and Decoder)
