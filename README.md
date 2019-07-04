@@ -8,7 +8,7 @@ encoder-decoder summarization model, tensorflow offers basic model: IT turns out
 
 End-to-end approach to sequence learning that makes minimal assumptions on the sequence structure. Our method uses a multi-layered Long Short-Term Memory (LSTM) to map the input sequence to a vector of a fixed dimensionality, and then another deep LSTM to decode the target sequence from the vector.
 
-For Example:
+# For Example:
 # Input:
 Australian wine exports hit a record 52.1 million litters worth 260 million dollars (143 million us) in September, the government statistics office reported on Monday
 # Output:
