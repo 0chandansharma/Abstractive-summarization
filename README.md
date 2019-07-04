@@ -21,7 +21,6 @@ def seq2seq_model_builder(HIDDEN_DIM=300):
     decoder_LSTM = LSTM(HIDDEN_DIM, return_state=True, return_sequences=True)
     decoder_outputs, _, _ = decoder_LSTM(decoder_embedding, initial_state=[state_h, state_c])
     
-    # dense_layer = Dense(VOCAB_SIZE, activation='softmax')
     outputs = TimeDistributed(Dense(VOCAB_SIZE, activation='softmax'))(decoder_outputs)
     model = Model([encoder_inputs, decoder_inputs], outputs)
     
@@ -30,13 +29,17 @@ def seq2seq_model_builder(HIDDEN_DIM=300):
 # The Layers can be broken down into 5 different parts:
 
 # Input Layer (Encoder and Decoder):
-encoder_input_layer = Input(shape=(sequence_length, ))
-decoder_input_layer = Input(shape=(sequence_length, ))
+
+    decoder_input_layer = Input(shape=(sequence_length, ))
+    encoder_input_layer = Input(shape=(sequence_length, ))
+
+
 
 # Embedding Layer (Encoder and Decoder)
  embedding_layer = Embedding(input_dim = vocab_size,
                             output_dim = embedding_dimension, 
                             input_length = sequence_length)
+
 # LSTM Layer (Encoder and Decoder)
 encoder_LSTM = LSTM(HIDDEN_DIM, return_state=True)    encoder_outputs, state_h, state_c = encoder_LSTM(encoder_embedding)
 decoder_LSTM = LSTM(HIDDEN_DIM, return_state=True, return_sequences=True)   
