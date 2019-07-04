@@ -27,7 +27,6 @@ def seq2seq_model_builder(HIDDEN_DIM=300):
     
     return model
 
-
 # The Layers can be broken down into 5 different parts:
 
 # Input Layer (Encoder and Decoder):
@@ -49,11 +48,13 @@ decoder_outputs, _, _ = decoder_LSTM(decoder_embedding, initial_state=[state_h, 
  
  
  # Whole process can be:
-Text CLeaning
+# Text CLeaning
 Put <BOS> tag and <EOS> tag for decoder input
   <BOS> means “Begin of Sequence”, <EOS> means “End of Sequence”.
-Make Vocabulary (VOCAB_SIZE)
-    from keras.preprocessing.text import Tokenizer
+ 
+# Vocabulary 
+  
+  from keras.preprocessing.text import Tokenizer
 
 def vocab_creater(text_lists, VOCAB_SIZE):
 
@@ -74,7 +75,7 @@ def vocab_creater(text_lists, VOCAB_SIZE):
 
 word2idx, idx2word = vocab_creater(text_lists=encoder_input_text+decoder_input_t
 
-Tokenize Bag of words to Bag of IDs
+# Tokenize Bag of words to Bag of IDs
 from keras.preprocessing.text import Tokenizer
 VOCAB_SIZE = 14999
 
@@ -89,7 +90,7 @@ def text2seq(encoder_text, decoder_text, VOCAB_SIZE):
 encoder_sequences, decoder_sequences = text2seq(encoder_text, decoder_text, VOCAB_SIZE) 
 
 
-Padding (MAX_LEN)
+# Padding
 
 from keras.preprocessing.sequence import pad_sequences
 
@@ -102,12 +103,12 @@ def padding(encoder_sequences, decoder_sequences, MAX_LEN):
 
 encoder_input_data, decoder_input_data = padding(encoder_sequences, decoder_sequences, MAX_LEN):
 
-Word Embedding (EMBEDDING_DIM)
+# Word Embedding
  We use Pretraind Word2Vec Model from Glove
  
-Reshape the Data depends on neural network shape
+# Reshape the Data depends on neural network shape
 
-Split Data for training and validation, testing
+# Split Data for training and validation, testing
 
 # For Example:
 # Input:
