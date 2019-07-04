@@ -27,17 +27,17 @@ End-to-end approach to sequence learning that makes minimal assumptions on the s
     
     return model
 
-# The Layers can be broken down into 5 different parts:
-Input Layer (Encoder and Decoder):
-Embedding Layer (Encoder and Decoder)
-LSTM Layer (Encoder and Decoder)
-Decoder Output Layer
+## The Layers can be broken down into 5 different parts:
+###### Input Layer (Encoder and Decoder):
+###### Embedding Layer (Encoder and Decoder)
+###### LSTM Layer (Encoder and Decoder)
+###### Decoder Output Layer
 
  
  # Procedure of summarization:
-# Text Preprocessing
- Loading Story:
- 
+## Text Preprocessing
+ ###### Loading Story:
+ '''
  def load_stories(directory):
     stories = list()
     for name in listdir(directory):
@@ -50,8 +50,8 @@ Decoder Output Layer
     return stories
 directory = 'dataset/stories_text_summarization_dataset_test'
 stories = load_stories(directory)
-
- Splititng story:
+'''
+ ###### Splititng story:
  
  def split_story(doc):
     index = doc.find('@highlight')
@@ -59,7 +59,7 @@ stories = load_stories(directory)
     highlights = [h.strip() for h in highlights if len(h) > 0]
     return story, highlights
    
-  cleaning lines:
+  ###### cleaning lines:
   
   def clean_lines(lines):
     cleaned = list()
@@ -78,7 +78,7 @@ stories = load_stories(directory)
   
 
   
-# Put BOS tag and EOS tag for decoder input
+## Put BOS tag and EOS tag for decoder input
   means “Begin of Sequence”, and “End of Sequence”.
   
   def tagger(decoder_input_sentence):
@@ -89,7 +89,7 @@ stories = load_stories(directory)
 
 decoder_inputs = tagger(decoder_input_text)
  
-# Vocabulary 
+## Vocabulary 
   
   from keras.preprocessing.text import Tokenizer
 
@@ -112,7 +112,7 @@ def vocab_creater(text_lists, VOCAB_SIZE):
 
 word2idx, idx2word = vocab_creater(text_lists=encoder_input_text+decoder_input_t
 
-# Tokenize Bag of words to Bag of IDs
+## Tokenize Bag of words to Bag of IDs
 from keras.preprocessing.text import Tokenizer
 VOCAB_SIZE = 14999
 
@@ -127,7 +127,7 @@ def text2seq(encoder_text, decoder_text, VOCAB_SIZE):
 encoder_sequences, decoder_sequences = text2seq(encoder_text, decoder_text, VOCAB_SIZE) 
 
 
-# Padding
+## Padding
 
 from keras.preprocessing.sequence import pad_sequences
 
@@ -140,7 +140,7 @@ def padding(encoder_sequences, decoder_sequences, MAX_LEN):
 
 encoder_input_data, decoder_input_data = padding(encoder_sequences, decoder_sequences, MAX_LEN):
 
-# Word Embedding
+## Word Embedding
  We use Pretraind Word2Vec Model from Glove
  
 import numpy as np
@@ -156,16 +156,16 @@ for line in f:
     word_embeddings[word] = coefs
 f.close()
  
-# Reshape the Data depends on neural network shape
+## Reshape the Data depends on neural network shape
 
-# Split Data for training and validation, testing
+## Split Data for training and validation, testing
 
  from sklearn.model_selection import train_test_split
 
 # For Example:
-# Input:
+## Input:
 Australian wine exports hit a record 52.1 million litters worth 260 million dollars (143 million us) in September, the government statistics office reported on Monday
-# Output:
+## Output:
 Australian wine exports hit record high in September
 
 # 
